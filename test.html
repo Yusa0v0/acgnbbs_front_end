@@ -1,0 +1,41 @@
+<template>
+    <div class="comment-box">
+        <el-input class="comment-input" type="textarea" placeholder="请输入评论内容" autosize :rows="1"
+            v-model="commentContent" @keyup.enter.native="submitComment" @keydown.enter.native.prevent></el-input>
+        <el-button class="comment-button" type="primary" size="medium" @click="submitComment">
+            发送评论
+        </el-button>
+    </div>
+</template>
+
+<script>
+    export default {
+        data() {
+            return {
+                commentContent: '',
+            };
+        },
+        methods: {
+            submitComment() {
+                // 在这里触发提交事件
+            },
+        },
+    };
+</script>
+
+<style scoped>
+    .comment-box {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .comment-input {
+        flex-grow: 1;
+    }
+
+    .comment-button {
+        height: 100%;
+        flex-shrink: 0;
+    }
+</style>
