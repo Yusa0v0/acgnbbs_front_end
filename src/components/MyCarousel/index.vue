@@ -5,8 +5,8 @@
         <el-carousel-item v-for="(item, index) in imgList" :key="index">
           <img
             :src="item.imageUrl"
+            @click="handleClick(item.jumpTo)"
             class="slider-img"
-            @click="handleClick(item.action)"
           />
         </el-carousel-item>
       </el-carousel>
@@ -23,22 +23,13 @@ export default {
     [Carousel.name]: Carousel,
     [CarouselItem.name]: CarouselItem,
   },
-  data() {
-    return {
-      imgList: [
-        {
-          imageUrl: "https://ruabit-acgnbbs.oss-cn-hangzhou.aliyuncs.com/banner/202304152253647.jpg",
-          action: "111",
-        },
-        { imageUrl: "https://placekitten.com/640/480?image=2", action: "111" },
-        { imageUrl: "https://placekitten.com/640/480?image=3", action: "111" },
-        { imageUrl: "https://placekitten.com/640/480?image=4", action: "111" },
-      ],
-    };
+  props: {
+    imgList: Array,
+    require: true,
   },
   methods: {
-    handleClick(action) {
-      this.$message.success("action:" + action);
+    handleClick(jumpTo) {
+      this.$router.push(jumpTo);
     },
   },
 };
@@ -54,7 +45,6 @@ export default {
   height: 400px;
 }
 .slider-img {
-  cursor: pointer;
   display: block;
   width: 100%;
   height: 100%;

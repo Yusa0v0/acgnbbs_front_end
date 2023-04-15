@@ -1,11 +1,13 @@
 <template>
   <div id="app">
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
+
     <div class="bgimageview" :style="{ '--bg': `url(${headImg}) no-repeat` }">
       <Header v-if="$route.meta.headerShow"></Header>
       <router-view></router-view>
     </div>
     <live2d />
+
     <Footer v-if="$route.meta.footerShow"></Footer>
   </div>
 </template>
@@ -26,13 +28,15 @@ export default {
   components: {
     Header,
     Footer,
-    Live2d
+    Live2d,
   },
 };
 </script>
 
 <style>
 #app {
+  /* cursor: url("https://blog-static.cnblogs.com/files/Gealach/2020022501595055_easyicon_net_32.ico?t=1582610520"),
+    auto; */
   /* font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; */
@@ -44,7 +48,6 @@ export default {
 .bgimageview {
   background: var(--bg) no-repeat fixed center top;
   background-attachment: fixed;
-
   min-height: 100vh;
   text-align: center;
   background-size: 100% 100%;

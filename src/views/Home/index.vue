@@ -1,22 +1,45 @@
 <template>
-    <div class="contain">
-      <!-- <PostList></PostList> -->
+  <div class="home-contain">
+    <!-- <PostList></PostList> -->
+    <div class="home-content">
       <card :cardData="cardData"></card>
+      <my-carousel :imgList="imgList"></my-carousel>
     </div>
+  </div>
 </template>
 
 <script>
 // 引入其余组件
 import Card from "@/components/Card/index.vue";
+import MyCarousel from "@/components/MyCarousel/index.vue";
+
 export default {
   name: "Home",
   components: {
     Card,
+    MyCarousel,
   },
   data() {
     return {
-
-
+      imgList: [
+        {
+          imageUrl: "https://placekitten.com/640/480?image=2",
+          jumpTo: "/userInfo/8",
+        },
+        {
+          imageUrl:
+            "https://ruabit-acgnbbs.oss-cn-hangzhou.aliyuncs.com/banner/202304152253647.jpg",
+          jumpTo: "/postDetails/18",
+        },
+        {
+          imageUrl: "https://placekitten.com/640/480?image=3",
+          jumpTo: "/postDetails/18",
+        },
+        {
+          imageUrl: "https://placekitten.com/640/480?image=4",
+          jumpTo: "/postDetails/18",
+        },
+      ],
       cardData: [
         {
           title: "Animation",
@@ -53,12 +76,17 @@ export default {
 </script>
 
 <style scoped lang="less">
-.contain {
-  // width: 80%;
-  // margin-top: 20px;
+.home-contain {
   display: flex;
   justify-content: center;
-  // padding-bottom: 500px;
-  // margin-bottom: 600px;
+  align-items: center;
+}
+.home-content {
+  display: flex;
+  flex-direction: column;
+  // justify-content: center;
+  background: rgba(255, 255, 255, 0.75);
+  min-height: 100vh;
+  width: 800px;
 }
 </style>
