@@ -4,6 +4,7 @@
       class="list-page"
       v-loading="listLoading"
       element-loading-text="数据正在加载中~"
+      element-loading-background="rgba(255, 255, 255, 0.3)"
     >
       <div v-for="post in posts" :key="post.id" class="post-line">
         <div class="post-item">

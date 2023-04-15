@@ -1,6 +1,11 @@
 <template>
   <div class="rank-list-page">
-    <div class="list-page">
+    <div
+      class="list-page"
+      v-loading="listLoading"
+      element-loading-text="数据正在加载中~"
+      element-loading-background="rgba(255, 255, 255, 0.3)"
+    >
       <el-tabs v-model="activeTab" @tab-click="handleTabsClick">
         <el-tab-pane name="scoreRank">
           <span slot="label"><i class="el-icon-s-data"></i> 积分排行</span>
@@ -94,6 +99,7 @@ export default {
   },
   data() {
     return {
+      listLoading: true,
       activeTab: "scoreRank", // 默认显示帖子列表
       rankList: [],
       tag: "积分",
@@ -107,8 +113,9 @@ export default {
   mounted() {
     this.scoreRank();
   },
-  methods: {    
+  methods: {
     scoreRank() {
+      this.listLoading = true;
       api
         .scoreRank()
         .then((response) => {
@@ -118,6 +125,7 @@ export default {
             element.rank = index + 1;
           }
           console.log(this.rankList);
+          this.listLoading = false;
         })
         .catch((error) => {
           this.error = error.response.data.message;
@@ -125,6 +133,7 @@ export default {
         });
     },
     signNumRank() {
+      this.listLoading = true;
       api
         .signNumRank()
         .then((response) => {
@@ -134,6 +143,7 @@ export default {
             element.rank = index + 1;
           }
           console.log(this.rankList);
+          this.listLoading = false;
         })
         .catch((error) => {
           this.error = error.response.data.message;
@@ -141,6 +151,7 @@ export default {
         });
     },
     fanNumRank() {
+      this.listLoading = true;
       api
         .fanNumRank()
         .then((response) => {
@@ -150,6 +161,7 @@ export default {
             element.rank = index + 1;
           }
           console.log(this.rankList);
+          this.listLoading = false;
         })
         .catch((error) => {
           this.error = error.response.data.message;
@@ -157,6 +169,7 @@ export default {
         });
     },
     postNumRank() {
+      this.listLoading = true;
       api
         .postNumRank()
         .then((response) => {
@@ -166,6 +179,7 @@ export default {
             element.rank = index + 1;
           }
           console.log(this.rankList);
+          this.listLoading = false;
         })
         .catch((error) => {
           this.error = error.response.data.message;
@@ -173,6 +187,7 @@ export default {
         });
     },
     commentNumRank() {
+      this.listLoading = true;
       api
         .commentNumRank()
         .then((response) => {
@@ -182,6 +197,7 @@ export default {
             element.rank = index + 1;
           }
           console.log(this.rankList);
+          this.listLoading = false;
         })
         .catch((error) => {
           this.error = error.response.data.message;

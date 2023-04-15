@@ -79,6 +79,7 @@
               @cell-click="cellHandleClick"
               v-loading="listLoading"
               element-loading-text="数据正在加载中~"
+              element-loading-background="rgba(255, 255, 255, 0.3)"
             >
               <el-table-column prop="id" label="帖子ID"></el-table-column>
               <el-table-column prop="authorName" label="作者"></el-table-column>
