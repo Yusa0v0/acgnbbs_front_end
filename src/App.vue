@@ -5,6 +5,7 @@
       <Header v-if="$route.meta.headerShow"></Header>
       <router-view></router-view>
     </div>
+    <live2d />
     <Footer v-if="$route.meta.footerShow"></Footer>
   </div>
 </template>
@@ -12,6 +13,7 @@
 <script>
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Live2d from "./components/Live2d";
 
 export default {
   name: "App",
@@ -24,6 +26,7 @@ export default {
   components: {
     Header,
     Footer,
+    Live2d
   },
 };
 </script>
