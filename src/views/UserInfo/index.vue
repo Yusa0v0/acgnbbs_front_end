@@ -74,7 +74,12 @@
             <span slot="label"><i class="el-icon-s-order"></i> 帖子</span>
             <div v-if="myPosts.length === 0">暂无帖子</div>
 
-            <el-table :data="myPosts" @cell-click="cellHandleClick">
+            <el-table
+              :data="myPosts"
+              @cell-click="cellHandleClick"
+              v-loading="listLoading"
+              element-loading-text="数据正在加载中~"
+            >
               <el-table-column prop="id" label="帖子ID"></el-table-column>
               <el-table-column prop="authorName" label="作者"></el-table-column>
               <el-table-column prop="title" label="标题"></el-table-column>
@@ -107,7 +112,12 @@
 
             <div v-if="myFavorites.length === 0">暂无收藏</div>
 
-            <el-table :data="myFavorites" @cell-click="cellHandleClick">
+            <el-table
+              :data="myFavorites"
+              @cell-click="cellHandleClick"
+              v-loading="listLoading"
+              element-loading-text="数据正在加载中~"
+            >
               <el-table-column prop="id" label="帖子ID"></el-table-column>
               <el-table-column prop="authorName" label="作者"></el-table-column>
               <el-table-column prop="title" label="标题"></el-table-column>
@@ -139,7 +149,12 @@
             >
 
             <div v-if="myComments.length === 0">暂无评论</div>
-            <el-table :data="myComments" @cell-click="cellHandleClick">
+            <el-table
+              :data="myComments"
+              @cell-click="cellHandleClick"
+              v-loading="listLoading"
+              element-loading-text="数据正在加载中~"
+            >
               <el-table-column prop="id" label="评论ID"></el-table-column>
               <el-table-column prop="postTitle" label="标题"></el-table-column>
               <el-table-column
@@ -178,6 +193,7 @@ export default {
   },
   data() {
     return {
+      listLoading: true,
       isFollowed: false,
       activeTab: "myPosts", // 默认显示帖子列表
       userInfo: {
@@ -411,6 +427,7 @@ export default {
           this.userInfo.username = this.editForm.username;
           this.userInfo.avatar = this.editForm.avatar;
           localStorage.setItem("avatar", this.userInfo.avatar);
+          localStorage.setItem("username", this.userInfo.username);
           this.userInfo.gender = this.editForm.gender;
           this.userInfo.bio = this.editForm.bio;
           this.showEditDialog = false;
@@ -439,6 +456,8 @@ export default {
         });
     },
     userPostList() {
+      this.listLoading = true;
+
       api
         .userPostList(
           this.userId,
@@ -462,6 +481,7 @@ export default {
           this.pagination.total = response.data.total;
           console.log(this.pagination.total);
           console.log(this.myPosts);
+          this.listLoading = false;
         })
         .catch((error) => {
           this.error = error.response.data.message;
@@ -470,6 +490,7 @@ export default {
         });
     },
     userCommentList() {
+      this.listLoading = true;
       api
         .userCommentList(
           this.userId,
@@ -480,6 +501,7 @@ export default {
           this.myComments = response.data.userCommentList;
           this.pagination.total = response.data.total;
           console.log(this.myComments);
+          this.listLoading = false;
         })
         .catch((error) => {
           this.error = error.response.data.message;
@@ -488,6 +510,7 @@ export default {
         });
     },
     userFavoriteList() {
+      this.listLoading = true;
       api
         .userFavoriteList(
           this.userId,
@@ -508,6 +531,8 @@ export default {
               element.categoryName = "小说";
             }
           }
+          this.listLoading = false;
+
           console.log(this.myFavorites);
           this.pagination.total = response.data.total;
           console.log(this.pagination.total);

@@ -1,6 +1,10 @@
 <template>
   <div class="post-page">
-    <div class="post-page-content">
+    <div
+      class="post-page-content"
+      v-loading="listLoading"
+      element-loading-text="数据正在加载中~"
+    >
       <reading-post :post="post" :postId="postId" />
       <el-divider content-position="center"></el-divider>
 
@@ -38,6 +42,7 @@ export default {
   },
   data() {
     return {
+      listLoading: true,
       post: {},
       postId: 0,
       comments: [],
@@ -63,19 +68,20 @@ export default {
       console.log("父组件log：" + this.pagination.currentPage);
     },
     postDetails() {
+      this.listLoading = true;
       api
         .postDetails(this.postId)
         .then((res) => {
           this.post = res.data;
           this.pagination.total = this.post.commentNum;
           console.log(this.post);
+          this.listLoading = false;
         })
         .catch((error) => {
           console.log("" + error);
         });
     },
     postComments() {
-      let this1 = this;
       api
         .postCommentList(
           this.postId,
@@ -86,9 +92,6 @@ export default {
           this.comments = res.data;
           console.log("父组件");
           console.log(this.comments);
-          // this1.pagination.pageSize = res.data.size;
-          // this1.pagination.total = res.data.total; //记录总数 前端loyout中展示
-          // this1.pagination.currentpage = res.data.current; //重新经行赋值
         })
         .catch((error) => {
           console.log("未登录：" + error);

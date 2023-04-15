@@ -82,7 +82,7 @@
                     <a class="profile-avatar" @click="goToUserInfo">
                       <img :src="avatar"
                     /></a>
-                    <p class="profile-nickName">超级脆脆鲨</p>
+                    <p class="profile-nickName">{{ this.username }}</p>
                   </div>
                   <a href="" @click="logout">登出</a>
                 </div>
@@ -115,6 +115,7 @@ export default {
     return {
       activeTab: "home",
       signed: false,
+      username: localStorage.getItem("username"),
       avatar: localStorage.getItem("avatar"),
       opacity: 1,
       display: "none",

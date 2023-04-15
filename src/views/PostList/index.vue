@@ -1,6 +1,10 @@
 <template>
   <div class="post-list-page">
-    <div class="list-page">
+    <div
+      class="list-page"
+      v-loading="listLoading"
+      element-loading-text="数据正在加载中~"
+    >
       <div v-for="post in posts" :key="post.id" class="post-line">
         <div class="post-item">
           <div class="post-header" @click="goToUserInfo(post.authorId)">
@@ -69,6 +73,7 @@ export default {
   },
   data() {
     return {
+      listLoading: true,
       posts: [],
       notices: [],
       category: "",
@@ -117,12 +122,15 @@ export default {
     },
     // 获取漫画帖子列表
     animationPostList() {
+      this.listLoading = true;
+
       api
         .animationPostList(this.pagination.currentPage)
         .then((res) => {
           this.posts = res.data.postList;
           this.pagination.total = res.data.total;
           console.log("total:" + this.pagination.total);
+          this.listLoading = false;
         })
         .catch((error) => {
           console.log(error);
@@ -131,12 +139,15 @@ export default {
     },
     // 获取动漫帖子列表
     comicPostList() {
+      this.listLoading = true;
+
       api
         .comicPostList(this.pagination.currentPage)
         .then((res) => {
           this.posts = res.data.postList;
           this.pagination.total = res.data.total;
           console.log("total:" + this.pagination.total);
+          this.listLoading = false;
         })
         .catch((error) => {
           console.log(error);
@@ -145,11 +156,14 @@ export default {
     },
     // 获取游戏帖子列表
     gamePostList() {
+      this.listLoading = true;
+
       api
         .gamePostList(this.pagination.currentPage)
         .then((res) => {
           this.posts = res.data.postList;
           this.pagination.total = res.data.total;
+          this.listLoading = false;
         })
         .catch((error) => {
           console.log(error);
@@ -158,11 +172,14 @@ export default {
     },
     // 获取小说帖子列表
     novelPostList() {
+      this.listLoading = true;
+
       api
         .novelPostList(this.pagination.currentPage)
         .then((res) => {
           this.posts = res.data.postList;
           this.pagination.total = res.data.total;
+          this.listLoading = false;
         })
         .catch((error) => {
           console.log(error);

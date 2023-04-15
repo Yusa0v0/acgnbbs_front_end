@@ -97,21 +97,34 @@ export default {
       let content = this.commentContent;
       let this1 = this;
       let postId = this.postId;
-      api
-        .addComment(userId, postId, content)
-        .then((response) => {
-          // const token = response.data;
-          this.$message.success("评论成功");
-          this1.commentContent = "";
-          // 如果评论数小于pageSize就刷新，否则不刷新
-          if (this.comments.length < this.pageSize) {
-            this1.$emit("refreshComments");
-          }
-        })
-        .catch((error) => {
-          this.error = error.response.data.message;
-          this.$message.error("请求异常" + this.error);
-        });
+      if (content == "") {
+        this.$message.error("请输入内容");
+      } else {
+        api
+          .addComment(userId, postId, content)
+          .then((response) => {
+            // const token = response.data;
+            this.$message.success("评论成功");
+            this1.commentContent = "";
+            // 如果评论数小于pageSize就刷新，否则不刷新
+            if (this.comments.length < this.pageSize) {
+              // 本地刷新方案
+              // let cmt = {
+              //   content: content,
+              //   userId: userId,
+              //   username: localStorage.getItem("username"),
+              //   avatar: localStorage.getItem("avatar"),
+              //   createdAt: new Date(),
+              // };
+              // this.comments.push(cmt);
+              this1.$emit("refreshComments");
+            }
+          })
+          .catch((error) => {
+            // this.error = error.response.data.message;
+            this.$message.error("请求异常" + error);
+          });
+      }
     },
   },
 };
