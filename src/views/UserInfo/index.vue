@@ -19,12 +19,18 @@
         <h3>性别: {{ userInfo.gender }}</h3>
 
         <h3>个人简介: {{ userInfo.bio }}</h3>
-        <span>关注:{{ this.followNum }}</span>
-        <span>粉丝:{{ this.fansNum }} </span>
+        <span @click="handleClickFollowList">关注:{{ this.followNum }}</span>
+        <span @click="handleClickFansList">粉丝:{{ this.fansNum }} </span>
         <div v-if="this.showEditButton">
           <el-button type="primary" @click="showDialog">修改个人信息</el-button>
         </div>
-        <el-dialog title="修改资料" :visible.sync="showEditDialog">
+        <el-dialog
+          title="修改资料"
+          width="40%"
+          :lock-scroll="false"
+          class="userInfo-dialog"
+          :visible.sync="showEditDialog"
+        >
           <el-form
             ref="editForm"
             :model="editForm"
@@ -65,6 +71,59 @@
             <el-button @click="showEditDialog = false">取消</el-button>
             <el-button type="primary" @click="saveUserInfo">保存</el-button>
           </div>
+        </el-dialog>
+        <el-dialog
+          title="关注"
+          width="30%"
+          :lock-scroll="false"
+          class="userInfo-dialog"
+          :visible.sync="showFollowDialog"
+        >
+          <div
+            v-for="follow in followList"
+            :key="follow.id"
+            class="rank-line"
+          >
+            <div class="rank-item">
+              <div class="rank-content">{{ follow.id }}</div>
+              <div
+                class="rank-header"
+                @click="goToUserInfo(follow.id)"
+              >
+                <el-avatar
+                  :src="follow.avatar"
+                  size="large"
+                  class="rank-avatar"
+                  :title="follow.username"
+                ></el-avatar>
+              </div>
+
+              <div class="rank-body">
+                <span
+                  class="rank-title"
+                  :title="follow.username"
+                  @click="goToUserInfo(follow.id)"
+                >
+                  {{ follow.username }}
+                </span>
+                <span class="post-time"> {{ follow.bio }}</span>
+              </div>
+
+              <el-button :size="small" type="primary" class="rank-user-score">
+                {{ follow.gender }}
+              </el-button>
+            </div>
+            <el-divider content-position="center"></el-divider>
+          </div>
+        </el-dialog>
+
+        <el-dialog
+          title="粉丝"
+          width="30%"
+          :lock-scroll="false"
+          class="userInfo-dialog"
+          :visible.sync="showFansDialog"
+        >
         </el-dialog>
       </div>
 
@@ -205,6 +264,8 @@ export default {
         avatar: "https://avatars.githubusercontent.com/u/46166283?v=4", // 默认头像
       },
       showEditDialog: false,
+      showFollowDialog: false,
+      showFansDialog: false,
       showEditButton: false,
       editForm: {
         username: "",
@@ -328,10 +389,6 @@ export default {
       else {
         this.goToPostDetails(row.id);
       }
-      console.log(row);
-      // console.log(column);
-      // console.log(cell);
-      // console.log(event);
     },
     // 跳转到用户主页
     goToUserInfo(userId) {
@@ -458,7 +515,6 @@ export default {
     },
     userPostList() {
       this.listLoading = true;
-
       api
         .userPostList(
           this.userId,
@@ -543,11 +599,20 @@ export default {
           this.$message.error("请求异常" + this.error);
         });
     },
+    handleClickFollowList() {
+      this.showFollowDialog = true;
+      this.getFollowList();
+    },
+    handleClickFansList() {
+      this.showFansDialog = true;
+      this.getFansList();
+    },
+
     getFollowList() {
       api
         .followList(this.userId, 1, 10)
         .then((response) => {
-          this.followList = response.data.userInfoList;
+          this.followList = response.data.userInfoVOList;
           this.followNum = response.data.total;
           console.log(this.followList);
         })
@@ -560,7 +625,7 @@ export default {
       api
         .fansList(this.userId, 1, 10)
         .then((response) => {
-          this.fansList = response.data.userInfoList;
+          this.fansList = response.data.userInfoVOList;
           this.fansNum = response.data.total;
           console.log(this.fanList);
         })
@@ -639,5 +704,8 @@ export default {
   width: 178px;
   height: 178px;
   display: block;
+}
+.userInfo-dialog {
+  /* width: 600px; */
 }
 </style>
