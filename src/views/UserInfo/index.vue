@@ -3,42 +3,59 @@
     <div class="user-profile">
       <!-- 用户信息 -->
       <div class="user-info">
-        <el-avatar :src="userInfo.avatar"></el-avatar>
-        <span>
-          {{ userInfo.username }}
-          <span v-if="this.userInfo.gender === 1">
-            <i class="el-icon-female" style="color: #ff69b4"></i>
+        <span class="user-info-userLine">
+          <el-avatar :size="small" :src="userInfo.avatar"></el-avatar>
+          <el-divider direction="vertical"></el-divider>
+          <span>
+            {{ userInfo.username }}
+            <span v-if="this.userInfo.gender">
+              <i class="el-icon-female" style="color: #ff69b4"></i>
+            </span>
+            <span v-else>
+              <i class="el-icon-male" style="color: #00bfff"></i>
+            </span>
           </span>
-          <span v-else>
-            <i class="el-icon-male" style="color: #00bfff"></i>
-          </span>
-        </span>
-        <div v-show="!this.showEditButton">
-          <div v-if="!isFollowed">
-            <el-button type="primary" @click="addFollow"
-              >关注{{ userInfo.username }}</el-button
+          <el-divider direction="vertical"></el-divider>
+          <el-button-group>
+            <el-button
+              size="medium"
+              type="text"
+              class="no-outline"
+              @click="handleClickFollowList"
+              >关注:{{ this.followNum }}</el-button
             >
+            <el-button
+              size="medium"
+              type="text"
+              class="no-outline"
+              @click="handleClickFansList"
+              >粉丝:{{ this.fansNum }}
+            </el-button>
+          </el-button-group>
+          <div v-show="!this.showEditButton">
+            <div v-if="!isFollowed">
+              <el-button type="text" class="no-outline" @click="addFollow"
+                >关注{{ userInfo.username }}</el-button
+              >
+            </div>
+            <div v-else>
+              <el-button type="text" class="no-outline" @click="cancelFollow"
+                >已关注</el-button
+              >
+            </div>
           </div>
-          <div v-else>
-            <el-button @click="cancelFollow">已关注</el-button>
-          </div>
-        </div>
-        <div>用户ID: {{ userInfo.id }}</div>
+        </span>
 
-        <div>个人简介: {{ userInfo.bio }}</div>
-        <el-button-group>
-          <el-button size="medium" type="text" @click="handleClickFollowList"
-            >关注:{{ this.followNum }}</el-button
-          >
-          <el-button size="medium" type="text" @click="handleClickFansList"
-            >粉丝:{{ this.fansNum }}
-          </el-button>
-        </el-button-group>
-        <div v-if="this.showEditButton">
-          <el-button size="mini" type="primary" @click="showDialog"
-            >修改个人信息</el-button
-          >
+        <!-- <div>用户ID: {{ userInfo.id }}</div> -->
+        <div>
+          个人简介: {{ userInfo.bio }}
+          <span v-if="this.showEditButton">
+            <el-button size="mini" type="primary" @click="showDialog"
+              >修改个人信息</el-button
+            >
+          </span>
         </div>
+
         <el-dialog
           title="修改资料"
           width="40%"
@@ -785,6 +802,7 @@ export default {
   width: 800px;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 }
 .user-info {
   display: flex;
@@ -827,5 +845,11 @@ export default {
 }
 .no-outline:focus {
   outline: none;
+}
+.user-info-userLine {
+  display: flex;
+  /* flex-direction: column; */
+  /* justify-content: center; */
+  align-items: center;
 }
 </style>
