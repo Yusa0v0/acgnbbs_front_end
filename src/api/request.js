@@ -57,6 +57,8 @@ const api = {
     deletePost: (userId, postId) => service.get(`/post/deletePost/${userId}/${postId}`),
     getWritePost: (postId) => service.get(`/post/getWritePost/${postId}`),
 
+    report: (postId, userId, reportContent) => service.post('/report/report', { postId, userId, reportContent }),
+
     //帖子详细列表
     postDetails: (id) => service.get(`/post/postDetails/${id}`),
     // 帖子评论

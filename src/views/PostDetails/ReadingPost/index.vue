@@ -24,10 +24,33 @@
           :liked="post.liked"
           :count="post.likeNum"
         ></like>
+        <el-button type="text" class="no-outline" @click="showDialog"
+          >举报</el-button
+        >
       </div>
       <el-divider content-position="center"></el-divider>
-
       <div v-html="post.content"></div>
+      <el-dialog title="举报" width="40%" :visible.sync="showReportDialog">
+        <el-form ref="reportForm" :model="reportForm" label-width="80px">
+          <el-form-item label="举报信息" prop="reportContent">
+            <el-input
+              type="textarea"
+              placeholder="请输入举报内容"
+              :rows="6"
+              v-model="reportForm.reportContent"
+            ></el-input>
+          </el-form-item>
+          <el-form-item label="">
+            <el-button
+              type="primary"
+              @click="report"
+              :disabled="reportForm.reportContent.length == 0"
+            >
+              提交
+            </el-button>
+          </el-form-item>
+        </el-form>
+      </el-dialog>
     </div>
   </div>
 </template>
@@ -51,7 +74,12 @@ export default {
   },
   created() {},
   data() {
-    return {};
+    return {
+      reportForm: {
+        reportContent: "",
+      },
+      showReportDialog: false,
+    };
   },
   methods: {
     addLike() {
@@ -84,7 +112,25 @@ export default {
     formatDate(date) {
       return formatDate(date);
     },
-
+    showDialog() {
+      this.showReportDialog = true;
+    },
+    report() {
+      api
+        .report(
+          this.post.id,
+          localStorage.getItem("userId"),
+          this.reportForm.reportContent
+        )
+        .then((res) => {
+          this.$message.success("已举报，请等待管理员回复");
+          this.showReportDialog = false;
+        })
+        .catch((error) => {
+          this.$message.error("举报失败了哦，请重新试试吧~");
+          this.showReportDialog = false;
+        });
+    },
     star() {
       const userId = localStorage.getItem("userId");
       let id = this.post.id;

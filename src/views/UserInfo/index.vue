@@ -60,7 +60,6 @@
           title="修改资料"
           width="40%"
           :lock-scroll="false"
-          class="userInfo-dialog"
           :visible.sync="showEditDialog"
         >
           <el-form
@@ -108,7 +107,6 @@
           title="关注"
           width="30%"
           :lock-scroll="false"
-          class="userInfo-dialog"
           :visible.sync="showFollowDialog"
         >
           <div
@@ -162,7 +160,6 @@
           title="粉丝"
           width="30%"
           :lock-scroll="false"
-          class="userInfo-dialog"
           :visible.sync="showFansDialog"
         >
           <div v-for="(fan, index) in fansList" :key="index" class="rank-line">
@@ -840,9 +837,7 @@ export default {
   height: 178px;
   display: block;
 }
-.userInfo-dialog {
-  /* width: 600px; */
-}
+
 .no-outline:focus {
   outline: none;
 }
