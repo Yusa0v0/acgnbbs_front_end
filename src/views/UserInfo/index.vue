@@ -848,8 +848,6 @@ export default {
 }
 .user-info-userLine {
   display: flex;
-  /* flex-direction: column; */
-  /* justify-content: center; */
   align-items: center;
 }
 </style>

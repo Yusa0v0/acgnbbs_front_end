@@ -264,6 +264,7 @@ export default {
   min-height: 48px;
   display: flex; /* 将div设置为flex容器 */
   justify-content: center; /* 将子元素水平居中 */
+  align-items: center;
 }
 .navbar-box {
   position: fixed;
@@ -405,6 +406,8 @@ a {
   margin-top: calc((48px - 32px) / 2);
   margin-right: 16px;
   opacity: 1;
+    display: flex;
+  align-items: center;
 }
 .hasAvatar img {
   width: 32px;
@@ -423,6 +426,7 @@ a {
   z-index: 9999999;
   border-radius: 4px;
   box-shadow: 0 0 10px 2px rgb(0 0 0 / 6%);
+
 }
 .navbar-profile .profile-user {
   text-align: center;
@@ -471,6 +475,10 @@ a {
 }
 .navbar-fl {
   float: left;
+}
+.navbar-avatar {
+  display: flex;
+  align-items: center;
 }
 </style>
 
