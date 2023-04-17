@@ -25,9 +25,8 @@
               {{ post.title }}
             </span>
             <span class="post-time">
-              楼主：{{ post.authorName }} | {{ formatDate(post.createdAt) }} |
-              最后发表</span
-            >
+              楼主：{{ post.authorName }} | {{ formatDate(post.createdAt) }}
+            </span>
           </div>
         </div>
         <!-- <div> -->

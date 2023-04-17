@@ -82,7 +82,15 @@
                     <a class="profile-avatar" @click="goToUserInfo">
                       <img :src="avatar"
                     /></a>
-                    <p class="profile-nickName">{{ this.username }}</p>
+                    <p class="profile-nickName">
+                      {{ this.username
+                      }}<span v-if="this.gender == 1">
+                        <i class="el-icon-female" style="color: #ff69b4"></i>
+                      </span>
+                      <span v-else>
+                        <i class="el-icon-male" style="color: #00bfff"></i>
+                      </span>
+                    </p>
                   </div>
                   <a href="" @click="logout">登出</a>
                 </div>
@@ -117,6 +125,7 @@ export default {
       signed: false,
       username: localStorage.getItem("username"),
       avatar: localStorage.getItem("avatar"),
+      gender: localStorage.getItem("gender"),
       opacity: 1,
       display: "none",
       defaultText: "搜索",

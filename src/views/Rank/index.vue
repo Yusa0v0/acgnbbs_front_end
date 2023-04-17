@@ -52,6 +52,12 @@
               @click="goToUserInfo(rank.value.id)"
             >
               {{ rank.value.username }}
+              <span v-if="rank.value.gender">
+                <i class="el-icon-female" style="color: #ff69b4"></i>
+              </span>
+              <span v-else>
+                <i class="el-icon-male" style="color: #00bfff"></i>
+              </span>
             </span>
             <span class="post-time"> {{ rank.value.bio }}</span>
           </div>

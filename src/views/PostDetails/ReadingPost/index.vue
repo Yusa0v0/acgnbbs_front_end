@@ -8,8 +8,8 @@
           <el-divider direction="vertical"></el-divider> 发布时间：{{
             formatDate(post.createdAt)
           }}
-          <el-divider direction="vertical"></el-divider>
-          更新时间：{{ formatDate(post.updateAt) }}
+          <!-- <el-divider direction="vertical"></el-divider>
+          更新时间：{{ formatDate(post.updateAt) }} -->
           <el-divider direction="vertical"></el-divider> 浏览次数：{{
             post.viewTimes
           }}

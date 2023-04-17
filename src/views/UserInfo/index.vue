@@ -4,7 +4,15 @@
       <!-- 用户信息 -->
       <div class="user-info">
         <el-avatar :src="userInfo.avatar"></el-avatar>
-        <h2>{{ userInfo.username }}</h2>
+        <span>
+          {{ userInfo.username }}
+          <span v-if="this.userInfo.gender === 1">
+            <i class="el-icon-female" style="color: #ff69b4"></i>
+          </span>
+          <span v-else>
+            <i class="el-icon-male" style="color: #00bfff"></i>
+          </span>
+        </span>
         <div v-show="!this.showEditButton">
           <div v-if="!isFollowed">
             <el-button type="primary" @click="addFollow"
@@ -15,10 +23,9 @@
             <el-button @click="cancelFollow">已关注</el-button>
           </div>
         </div>
-        <h3>用户ID: {{ userInfo.id }}</h3>
-        <h3>性别: {{ userInfo.gender }}</h3>
+        <div>用户ID: {{ userInfo.id }}</div>
 
-        <h3>个人简介: {{ userInfo.bio }}</h3>
+        <div>个人简介: {{ userInfo.bio }}</div>
         <el-button-group>
           <el-button size="medium" type="text" @click="handleClickFollowList"
             >关注:{{ this.followNum }}</el-button
@@ -28,7 +35,9 @@
           </el-button>
         </el-button-group>
         <div v-if="this.showEditButton">
-          <el-button type="primary" @click="showDialog">修改个人信息</el-button>
+          <el-button size="mini" type="primary" @click="showDialog"
+            >修改个人信息</el-button
+          >
         </div>
         <el-dialog
           title="修改资料"
@@ -108,6 +117,12 @@
                   @click="goToUserInfo(follow.id)"
                 >
                   {{ follow.username }}
+                  <span v-if="follow.gender">
+                    <i class="el-icon-female" style="color: #ff69b4"></i>
+                  </span>
+                  <span v-else>
+                    <i class="el-icon-male" style="color: #00bfff"></i>
+                  </span>
                 </span>
                 <span class="post-time"> {{ follow.bio }}</span>
               </div>
@@ -152,6 +167,12 @@
                   @click="goToUserInfo(fan.id)"
                 >
                   {{ fan.username }}
+                  <span v-if="fan.gender">
+                    <i class="el-icon-female" style="color: #ff69b4"></i>
+                  </span>
+                  <span v-else>
+                    <i class="el-icon-male" style="color: #00bfff"></i>
+                  </span>
                 </span>
                 <span class="post-time"> {{ fan.bio }}</span>
               </div>
@@ -523,7 +544,11 @@ export default {
       this.showEditDialog = true;
       this.editForm.username = this.userInfo.username;
       this.editForm.avatar = this.userInfo.avatar;
-      this.editForm.gender = this.userInfo.gender;
+      if (this.userInfo.gender == 0) {
+        this.editForm.gender = "男";
+      } else {
+        this.editForm.gender = "女";
+      }
       this.editForm.bio = this.userInfo.bio;
       console.log(this.editForm);
     },
@@ -564,7 +589,7 @@ export default {
 
     saveUserInfo() {
       var gender = 0;
-      if (this.editForm.gender === "女") {
+      if (this.editForm.gender == "女") {
         gender = 1;
       }
       let userId = localStorage.getItem("userId");
@@ -579,9 +604,11 @@ export default {
         .then((response) => {
           this.userInfo.username = this.editForm.username;
           this.userInfo.avatar = this.editForm.avatar;
+          this.userInfo.gender = gender;
           localStorage.setItem("avatar", this.userInfo.avatar);
           localStorage.setItem("username", this.userInfo.username);
-          this.userInfo.gender = this.editForm.gender;
+          localStorage.setItem("gender", this.userInfo.gender);
+
           this.userInfo.bio = this.editForm.bio;
           this.showEditDialog = false;
           this.$message.success("修改成功");
@@ -597,11 +624,6 @@ export default {
         .then((response) => {
           this.userInfo = response.data;
           console.log(response.data);
-          if (this.userInfo.gender === 0) {
-            this.userInfo.gender = "男";
-          } else {
-            this.userInfo.gender = "女";
-          }
         })
         .catch((error) => {
           this.error = error.response.data.message;

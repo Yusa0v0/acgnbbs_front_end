@@ -39,7 +39,15 @@
           class="comment-avatar"
         ></el-avatar>
         <!--用户名  -->
-        <span class="comment-username">{{ comment.username }}</span>
+        <span class="comment-username"
+          >{{ comment.username }}
+          <span v-if="comment.gender">
+            <i class="el-icon-female" style="color: #ff69b4"></i>
+          </span>
+          <span v-else>
+            <i class="el-icon-male" style="color: #00bfff"></i>
+          </span>
+        </span>
       </div>
 
       <div class="comment-body">
