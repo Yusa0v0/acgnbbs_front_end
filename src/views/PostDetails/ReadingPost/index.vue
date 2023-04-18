@@ -119,7 +119,8 @@ export default {
       api
         .report(
           this.post.id,
-          localStorage.getItem("userId"),
+          // localStorage.getItem("userId"),
+          this.post.authorId,
           this.reportForm.reportContent
         )
         .then((res) => {
