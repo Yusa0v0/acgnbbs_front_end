@@ -29,7 +29,7 @@
         >
       </div>
       <el-divider content-position="center"></el-divider>
-      <div v-html="post.content"></div>
+      <div class="read-post-content" v-html="post.content"></div>
       <el-dialog title="举报" width="40%" :visible.sync="showReportDialog">
         <el-form ref="reportForm" :model="reportForm" label-width="80px">
           <el-form-item label="举报信息" prop="reportContent">
@@ -189,5 +189,15 @@ export default {
   text-align: center;
   justify-content: center;
   margin: auto;
+}
+/* .read-post-content {
+
+  margin: 20px;
+  width: 20vw;
+} */
+.read-post-content >>> img {
+  /* width: 100% !important; */
+  max-width: 600px;
+  max-height: 400px;
 }
 </style>
