@@ -1,16 +1,28 @@
 <template>
   <div id="app">
-    <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-
     <div class="bgimageview" :style="{ '--bg': `url(${headImg}) no-repeat` }">
       <Header v-if="$route.meta.headerShow"></Header>
       <router-view></router-view>
     </div>
     <live2d />
-
+    <meting-js
+      id="8692248848"
+      server="tencent"
+      type="playlist"
+      fixed="true"
+      autoplay="true"
+      loop="all"
+      order="random"
+      preload="auto"
+      list-folded="ture"
+      list-max-height="500px"
+      lrc-type="1"
+    >
+    </meting-js>
     <Footer v-if="$route.meta.footerShow"></Footer>
   </div>
 </template>
+
 
 <script>
 import Header from "./components/Header";
@@ -31,6 +43,7 @@ export default {
     Header,
     Footer,
     Live2d,
+    APlayer,
   },
   mounted() {
     this.getNewNotice();
@@ -58,16 +71,7 @@ export default {
 
 <style>
 #app {
-  /* cursor: url("https://blog-static.cnblogs.com/files/Gealach/2020022501595055_easyicon_net_32.ico?t=1582610520"),
-    auto; */
-  /* font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; */
-  /* text-align: center; */
-  /* color: #2c3e50; */
-  /* margin-top: 60px; */
 }
-/* *：{ margin:0; padding:0} */
 .bgimageview {
   background: var(--bg) no-repeat fixed center top;
   background-attachment: fixed;
