@@ -1,63 +1,54 @@
 <template>
-  <div class="carousel-container">
-    <div class="slider">
-      <el-carousel :interval="3000" arrow="always" indicator-position="outside">
-        <el-carousel-item v-for="(item, index) in imgList" :key="index">
-          <img
-            :src="item.imageUrl"
-            class="slider-img"
-            @click="handleClick(item.action)"
-          />
-        </el-carousel-item>
-      </el-carousel>
-    </div>
-  </div>
+  <div></div>
 </template>
 
 <script>
-import { Carousel, CarouselItem } from "element-ui";
-
 export default {
-  name: "Slider",
-  components: {
-    [Carousel.name]: Carousel,
-    [CarouselItem.name]: CarouselItem,
-  },
   data() {
     return {
-      imgList: [
-        {
-          imageUrl: "https://ruabit-acgnbbs.oss-cn-hangzhou.aliyuncs.com/banner/202304152253647.jpg",
-          action: "111",
-        },
-        { imageUrl: "https://placekitten.com/640/480?image=2", action: "111" },
-        { imageUrl: "https://placekitten.com/640/480?image=3", action: "111" },
-        { imageUrl: "https://placekitten.com/640/480?image=4", action: "111" },
-      ],
+      websock: null,
     };
   },
+  created() {
+    //页面刚进入时开启长连接
+    this.initWebSocket();
+  },
+  destroyed: function () {
+    //页面销毁时关闭长连接
+    this.websocketclose();
+  },
   methods: {
-    handleClick(action) {
-      this.$message.success("action:" + action);
+    //初始化weosocket
+    initWebSocket() {
+      const wsuri =
+        "ws:localhost:8000/webSocket/" + localStorage.getItem("userId"); //ws地址
+      this.websock = new WebSocket(wsuri);
+      this.websock.onopen = this.websocketonopen;
+      this.websock.onerror = this.websocketonerror;
+      this.websock.onmessage = this.websocketonmessage;
+      this.websock.onclose = this.websocketclose;
+    },
+    websocketonopen() {
+      console.log("WebSocket连接成功");
+    },
+    websocketonerror(e) {
+      //错误
+      console.log("WebSocket连接发生错误");
+    },
+    websocketonmessage(e) {
+      //数据接收
+      // const redata = JSON.parse(e.data);
+      // console.log(redata.value);
+      console.log(e.data);
+    },
+    websocketsend(agentData) {
+      //数据发送
+      this.websock.send(agentData);
+    },
+    websocketclose(e) {
+      //关闭
+      console.log("connection closed (" + e.code + ")");
     },
   },
 };
 </script>
-
-<style>
-.carousel-container {
-  display: flex;
-  justify-content: center;
-}
-.slider {
-  width: 600px;
-  height: 400px;
-}
-.slider-img {
-  cursor: pointer;
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-</style>

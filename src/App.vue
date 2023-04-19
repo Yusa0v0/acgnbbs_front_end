@@ -16,6 +16,7 @@
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Live2d from "./components/Live2d";
+import api from "@/api/request";
 
 export default {
   name: "App",
@@ -23,12 +24,34 @@ export default {
     return {
       headImg:
         "https://ruabit-acgnbbs.oss-cn-hangzhou.aliyuncs.com/icons/202304042106470.jpg",
+      notice: null,
     };
   },
   components: {
     Header,
     Footer,
     Live2d,
+  },
+  mounted() {
+    this.getNewNotice();
+  },
+
+  methods: {
+    getNewNotice() {
+      api
+        .getNewNotice()
+        .then((res) => {
+          this.notice = res.data;
+          this.$notify.info({
+            title: this.notice.title,
+            message: this.notice.content,
+            duration: 10000,
+          });
+        })
+        .catch((error) => {
+          // this.$message.error("获取公告失败~");
+        });
+    },
   },
 };
 </script>

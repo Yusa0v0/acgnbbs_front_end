@@ -129,7 +129,6 @@ export default {
       opacity: 1,
       display: "none",
       defaultText: "搜索",
-      notice: null,
     };
   },
   computed: {
@@ -252,30 +251,12 @@ export default {
       }
       // this.$router.push("/writePost");
     },
-    notify() {
-      this.$notify.info({
-        title: this.notice.title,
-        message: this.notice.content,
-        duration: 10000,
-      });
-    },
-    getNewNotice() {
-      api
-        .getNewNotice()
-        .then((res) => {
-          this.notice = res.data;
-          this.notify();
-        })
-        .catch((error) => {
-          // this.$message.error("获取公告失败~");
-        });
-    },
+   
   },
   mounted() {
     if (this.logined) {
       this.getSigned();
     }
-    this.getNewNotice();
   },
 };
 </script>
