@@ -45,7 +45,10 @@ const api = {
     // getGoodsList: (params) => service.get('/goods/list', { params }),
     // getGoodsDetail: (id) => service.get(`/goods/detail/${id}`),
 
+
+    //公告
     noticeList: () => service.get('/notice/noticeList'),
+    getNewNotice:() => service.get('/notice/getNewNotice'),
     //四个分类的列表
     animationPostList: (pageNum) => service.get(`/post/animationPostList/${pageNum}`),
     comicPostList: (pageNum) => service.get(`/post/comicPostList/${pageNum}`),
