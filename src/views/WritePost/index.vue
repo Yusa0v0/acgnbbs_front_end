@@ -33,9 +33,7 @@
           :rules="editRules"
           label-width="80px"
         >
-          <!-- <el-form-item label="昵称" prop="nickname">
-          <el-input v-model="editForm.nickname"></el-input>
-        </el-form-item> -->
+
 
           <el-form-item label="帖子分类" prop="category">
             <el-radio-group v-model="editForm.category">
@@ -63,18 +61,10 @@
               <img width="100%" :src="dialogImageUrl" alt="" />
             </el-dialog>
           </el-form-item>
-          <!-- <el-form-item label="城市" prop="city">
-          <el-select v-model="editForm.city" placeholder="请选择城市">
-            <el-option label="北京" value="北京"></el-option>
-            <el-option label="上海" value="上海"></el-option>
-            <el-option label="广州" value="广州"></el-option>
-            <el-option label="深圳" value="深圳"></el-option>
-          </el-select>
-        </el-form-item> -->
+
         </el-form>
         <div slot="footer">
           <el-button @click="showEditDialog = false">取消</el-button>
-          <!-- <el-button type="primary" @click="savePost">保存草稿</el-button> -->
           <el-button type="primary" @click="addPost">发布</el-button>
         </div>
       </el-dialog>
@@ -241,10 +231,6 @@ export default {
               formData.append("file", file);
               console.log(formData);
               this.$axios.post(this.uploadUrl, formData).then((res) => {
-                // console.log(res);
-                // console.log(res.data.data);
-                // console.log(res.data.code);
-                // console.log(res.data.msg);
                 if (res.data.code == 200) {
                   let length = quill.getSelection().index; //光标位置
                   console.log("length:" + length);
@@ -253,10 +239,6 @@ export default {
                   // 光标后移一位
                   quill.setSelection(length + 1);
                 } else {
-                  // this.$message({
-                  //   message: res.data,
-                  //   type: "warning",
-                  // });
                 }
               });
             });
