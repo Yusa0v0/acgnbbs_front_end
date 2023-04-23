@@ -123,13 +123,11 @@ export default {
     // 获取漫画帖子列表
     animationPostList() {
       this.listLoading = true;
-
       api
         .animationPostList(this.pagination.currentPage)
         .then((res) => {
           this.posts = res.data.postList;
           this.pagination.total = res.data.total;
-          console.log("total:" + this.pagination.total);
           this.listLoading = false;
         })
         .catch((error) => {
@@ -140,13 +138,11 @@ export default {
     // 获取动漫帖子列表
     comicPostList() {
       this.listLoading = true;
-
       api
         .comicPostList(this.pagination.currentPage)
         .then((res) => {
           this.posts = res.data.postList;
           this.pagination.total = res.data.total;
-          console.log("total:" + this.pagination.total);
           this.listLoading = false;
         })
         .catch((error) => {
@@ -157,7 +153,6 @@ export default {
     // 获取游戏帖子列表
     gamePostList() {
       this.listLoading = true;
-
       api
         .gamePostList(this.pagination.currentPage)
         .then((res) => {
@@ -173,7 +168,6 @@ export default {
     // 获取小说帖子列表
     novelPostList() {
       this.listLoading = true;
-
       api
         .novelPostList(this.pagination.currentPage)
         .then((res) => {
@@ -190,24 +184,12 @@ export default {
     goToPostDetails(id) {
       // 使用 Vue Router 的编程式导航，跳转到帖子详情页
       this.$router.push({ path: "/postDetails/" + id });
-      // 编程式导航打开新窗口
-      // let routerUrl = this.$router.resolve({
-      //   path: "/postDetails/" + id,
-      //   // query: { content: content },
-      // });
-      // window.open(routerUrl.href, "_blank");
     },
     goToUserInfo(userId) {
-      console.log("goToUserInfo");
-      let routerUrl = this.$router.resolve({
-        path: "/userInfo/" + userId,
-        // query: { content: content },
-      });
-      window.open(routerUrl.href, "_blank");
+      this.$router.push({ path: "/userInfo/" + userId });
     },
     setCurrectPage(currentPage) {
       this.pagination.currentPage = currentPage;
-      console.log("父组件" + this.pagination.currentPage);
     },
     getCurrectPagePostList() {
       if (this.category === "animation") {

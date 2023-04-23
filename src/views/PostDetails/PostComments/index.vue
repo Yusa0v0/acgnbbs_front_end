@@ -51,7 +51,7 @@
       </div>
 
       <div class="comment-body">
-        <p>{{ comment.content }}</p>
+        <p class="comment-content-body">{{ comment.content }}</p>
         <span class="comment-time">{{ formatDate(comment.createdAt) }}</span>
         <el-button
           class="reply-btn"
@@ -200,6 +200,9 @@ export default {
   padding-left: 10px;
   padding-right: 10px;
   flex: 1;
+}
+.comment-content-body {
+  max-width: 760px;
 }
 
 .comment-button {

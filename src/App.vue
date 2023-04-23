@@ -35,7 +35,8 @@ export default {
   data() {
     return {
       headImg:
-        "https://ruabit-acgnbbs.oss-cn-hangzhou.aliyuncs.com/icons/202304042106470.jpg",
+      "https://ruabit-acgnbbs.oss-cn-hangzhou.aliyuncs.com/icons/202304231900041.png",
+        // "https://ruabit-acgnbbs.oss-cn-hangzhou.aliyuncs.com/icons/202304042106470.jpg",
       notice: null,
     };
   },

@@ -1,11 +1,22 @@
 <template>
   <div id="like" :class="liked ? 'active' : ''" @click="change">
-    <span class="img"></span><span>{{ count }}</span>
+    <span class="img"></span>
+    <!-- <path
+      android:fillColor="#D50000"
+      android:pathData="M20.5,9.5
+        c-1.955,0,-3.83,1.268,-4.5,3
+        c-0.67,-1.732,-2.547,-3,-4.5,-3
+        C8.957,9.5,7,11.432,7,14
+        c0,3.53,3.793,6.257,9,11.5
+        c5.207,-5.242,9,-7.97,9,-11.5
+        C25,11.432,23.043,9.5,20.5,9.5z"
+    /> -->
+    <span>{{ count }}</span>
   </div>
 </template>
 <script>
 export default {
-  name:'like',
+  name: "like",
   props: {
     count: {
       type: Number,
@@ -43,8 +54,7 @@ export default {
   margin-right: 2px;
   width: 20px;
   height: 20px;
-  background: url(https://img3.doubanio.com/f/talion/c689ab2369da387f2cb0d4da4a22614d7f048bf9/pics/card/ic_heart_green.svg)
-    no-repeat;
+  background: url(@/icon/ic_heart_green.svg) no-repeat;
 }
 
 #like.active {
@@ -53,6 +63,6 @@ export default {
 }
 
 #like.active .img {
-  background-image: url(https://img3.doubanio.com/f/talion/0129352875382ff0544020161709c2ae9b00c737/pics/card/ic_heart_red.svg);
+  background-image: url(@/icon/ic_heart_red.svg);
 }
 </style>

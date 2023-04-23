@@ -101,10 +101,6 @@
                 <a href="" @click.prevent="goToRegister">注册</a>
               </div>
 
-              <!-- 会员中心 -->
-              <!-- <div class="navbar-btn navbar-btn-dynamic navbar-fl">
-                <a href="">会员中心</a>
-              </div> -->
               <div class="navbar-btn navbar-btn-news navbar-fl">
                 <el-button type="primary" @click="writePost">发布</el-button>
               </div>
@@ -155,6 +151,7 @@ export default {
       } else if (tab.name == "rank") {
         this.$router.push("/rank");
       } else if (tab.name == "sign") {
+        this.$router.push("/sign");
       }
     },
     sign() {
@@ -251,7 +248,6 @@ export default {
       }
       // this.$router.push("/writePost");
     },
-   
   },
   mounted() {
     if (this.logined) {
@@ -418,7 +414,7 @@ a {
 .navbar-profile {
   width: 248px;
   color: #222226;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.75);
   position: absolute;
   min-height: 200px;
   top: 48px;
