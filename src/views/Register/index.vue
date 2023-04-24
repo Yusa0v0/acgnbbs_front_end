@@ -2,7 +2,7 @@
   <div class="register-container-box">
     <div class="register-container">
       <div class="logo">
-        <img src="@/assets/logo.png" alt="Logo" />
+        <!-- <img src="@/assets/logo.png" alt="Logo" /> -->
         <h1>Register</h1>
       </div>
       <el-form

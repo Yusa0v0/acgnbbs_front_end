@@ -1,41 +1,30 @@
-<template>
-    <div class="comment-box">
-        <el-input class="comment-input" type="textarea" placeholder="请输入评论内容" autosize :rows="1"
-            v-model="commentContent" @keyup.enter.native="submitComment" @keydown.enter.native.prevent></el-input>
-        <el-button class="comment-button" type="primary" size="medium" @click="submitComment">
-            发送评论
-        </el-button>
-    </div>
-</template>
+<div class="comment-box">
+    <el-avatar :src="avatar" size="large" class="comment-avatar"></el-avatar>
+    <el-input class="comment-input" type="textarea" placeholder="请输入评论内容" autosize :rows="1" v-model="commentContent"
+        ref="commentInput" @keyup.enter.native="submitComment" @keydown.enter.native.prevent></el-input>
+    <el-button class="comment-button" type="primary" size="medium" @click="submitComment" :disabled="!commentContent">
+        发送评论
+    </el-button>
+</div>
+<div v-if="comments.length === 0">还没有评论哦，赶快发送一条吧~</div>
+<div class="comment-header" @click="goToUserInfo(comment.userId)" :title="comment.username">
+    <!-- 头像 -->
+    <el-avatar :src="comment.avatar" size="large" class="comment-avatar"></el-avatar>
+    <!--用户名  -->
+    <span class="comment-username">{{ comment.username }}
+        <span v-if="comment.gender">
+            <i class="el-icon-female" style="color: #ff69b4"></i>
+        </span>
+        <span v-else>
+            <i class="el-icon-male" style="color: #00bfff"></i>
+        </span>
+    </span>
+</div>
 
-<script>
-    export default {
-        data() {
-            return {
-                commentContent: '',
-            };
-        },
-        methods: {
-            submitComment() {
-                // 在这里触发提交事件
-            },
-        },
-    };
-</script>
-
-<style scoped>
-    .comment-box {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-    }
-
-    .comment-input {
-        flex-grow: 1;
-    }
-
-    .comment-button {
-        height: 100%;
-        flex-shrink: 0;
-    }
-</style>
+<div class="comment-body">
+    <p class="comment-content-body">{{ comment.content }}</p>
+    <span class="comment-time">{{ formatDate(comment.createdAt) }}</span>
+    <el-button class="reply-btn" type="text" size="mini" @click="replyComment(comment.username)">
+        回复
+    </el-button>
+</div>

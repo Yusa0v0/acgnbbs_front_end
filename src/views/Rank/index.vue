@@ -207,14 +207,11 @@ export default {
         })
         .catch((error) => {
           this.error = error.response.data.message;
-          this.$message.error("请求异常" + this.error);
         });
     },
 
     // 处理tabs变化
     handleTabsClick(tab, event) {
-      // console.log(tab, event);
-      // console.log(tab.name);
       if (tab.name == "scoreRank") {
         this.tag = "积分";
         this.scoreRank();

@@ -1,9 +1,9 @@
 <template>
   <div class="login-container-box">
     <div class="login-container">
-      <div class="logo">
+      <!-- <div class="logo">
         <img src="@/assets/logo.png" alt="Logo" />
-      </div>
+      </div> -->
       <h1>Login</h1>
       <el-form
         ref="loginForm"
@@ -32,29 +32,30 @@
           />
         </el-form-item>
         <el-form-item label="验证码" prop="code" v-if="loginType === 2">
-          <el-input
-            v-model="loginForm.code"
-            maxlength="4"
-            clearable
-            placeholder="请输入验证码"
-            prefix-icon="el-icon-lock"
-          />
-          <el-button
-            class="code-btn"
-            :disabled="countdown > 0"
-            @click="handleSendCode"
-          >
-            {{ countdown > 0 ? `${countdown}s` : "发送验证码" }}
-          </el-button>
+          
+            <el-input
+              v-model="loginForm.code"
+              maxlength="4"
+              clearable
+              placeholder="请输入验证码"
+              prefix-icon="el-icon-lock"
+            />
+            <el-button
+              class="code-btn"
+              :disabled="countdown > 0"
+              @click="handleSendCode"
+            >
+              {{ countdown > 0 ? `${countdown}s` : "发送验证码" }}
+            </el-button>
         </el-form-item>
         <el-form-item>
-          <el-radio-group v-model="loginType">
-            <el-radio :label="1">密码登录</el-radio>
-            <el-radio :label="2">验证码登录</el-radio>
-          </el-radio-group>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="login">登录</el-button>
+          <div class="login-content">
+            <el-radio-group v-model="loginType">
+              <el-radio :label="1">密码登录</el-radio>
+              <el-radio :label="2">验证码登录</el-radio>
+            </el-radio-group>
+            <el-button type="primary" @click="login">登录</el-button>
+          </div>
         </el-form-item>
       </el-form>
     </div>
@@ -268,4 +269,9 @@ export default {
   align-items: center;
   height: 100%;
 }
+.login-content {
+  display: flex;
+  flex-direction: column;
+}
+
 </style>

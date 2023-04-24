@@ -111,25 +111,15 @@ export default {
         api
           .addComment(userId, postId, content)
           .then((response) => {
-            // const token = response.data;
             this.$message.success("评论成功");
             this1.commentContent = "";
             // 如果评论数小于pageSize就刷新，否则不刷新
             if (this.comments.length < this.pageSize) {
-              // 本地刷新方案
-              // let cmt = {
-              //   content: content,
-              //   userId: userId,
-              //   username: localStorage.getItem("username"),
-              //   avatar: localStorage.getItem("avatar"),
-              //   createdAt: new Date(),
-              // };
-              // this.comments.push(cmt);
+
               this1.$emit("refreshComments");
             }
           })
           .catch((error) => {
-            // this.error = error.response.data.message;
             this.$message.error("请求异常" + error);
           });
       }
@@ -151,27 +141,21 @@ export default {
   display: flex;
   align-items: center;
   width: fit-content;
-  /* height: 100vh; */
 }
 
 .comment-username {
   margin-left: 10px;
   font-size: 16px;
   font-weight: bold;
-  /* line-height: 200px; */
-  /* align-items: center; */
   text-align: left;
   flex: 1;
 }
 .comment-time {
-  /* margin-left: 10px; */
   text-align: left;
   font-size: 12px;
   color: #999;
 }
 .comment-item {
-  /* display: flex; */
-  /* align-items: center; */
   text-align: left;
   margin-left: 20px;
   margin-right: 20px;
@@ -189,8 +173,6 @@ export default {
   margin-bottom: 20px;
   margin-left: 20px;
   margin-right: 20px;
-
-  /* width: 100%; */
 }
 .comment-avatar {
   text-align: center;
