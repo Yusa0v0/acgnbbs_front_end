@@ -174,7 +174,7 @@ export default {
 </script>
 <style scoped>
 .post-content-box {
-  width: 800px;
+  width: 900px;
   margin-bottom: 1px;
 }
 .post-content {

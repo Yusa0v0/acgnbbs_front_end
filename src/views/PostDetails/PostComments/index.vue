@@ -131,7 +131,7 @@ export default {
 <style scoped>
 .comment-card {
   margin-bottom: 20px;
-  width: 800px;
+  width: 900px;
 }
 .comment-header {
   margin-bottom: 10px;
@@ -184,7 +184,7 @@ export default {
   flex: 1;
 }
 .comment-content-body {
-  max-width: 760px;
+  max-width: 860px;
 }
 
 .comment-button {

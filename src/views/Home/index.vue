@@ -87,6 +87,6 @@ export default {
   // justify-content: center;
   background: rgba(255, 255, 255, 0.75);
   min-height: 100vh;
-  width: 800px;
+  width: 900px;
 }
 </style>

@@ -298,7 +298,7 @@ export default {
 }
 .write-content {
   background-color: white;
-  width: 800px;
+  width: 900px;
 
   /* background: rgba(255, 255, 255, 0.75); */
 }

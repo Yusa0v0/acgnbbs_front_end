@@ -269,7 +269,7 @@ export default {
 .list-page {
   /* display: flex;
   flex-direction: column; */
-  width: 800px;
+  width: 900px;
   /* justify-content: center; */
   /* align-items: center; */
   min-height: 100vh;

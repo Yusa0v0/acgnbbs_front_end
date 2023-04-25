@@ -838,7 +838,7 @@ export default {
   align-items: center;
   /* margin: 20px; */
   background: rgba(255, 255, 255, 0.7);
-  width: 800px;
+  width: 900px;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -849,7 +849,7 @@ export default {
   align-items: center;
   margin-top: 20px;
   margin-bottom: 20px;
-  width: 800px;
+  width: 900px;
 }
 .tabs {
   width: 100%;

@@ -34,6 +34,9 @@
               <el-tab-pane name="rank">
                 <span slot="label"> 排行</span>
               </el-tab-pane>
+              <el-tab-pane name="notice">
+                <span slot="label"> 公告</span>
+              </el-tab-pane>
               <el-tab-pane name="sign">
                 <span slot="label" v-if="!signed">
                   <a active-class="active" @click="sign"> 签到 </a>
@@ -152,6 +155,8 @@ export default {
         this.$router.push("/rank");
       } else if (tab.name == "sign") {
         this.$router.push("/sign");
+      } else if (tab.name == "notice") {
+        this.$router.push("/notice");
       }
     },
     sign() {
@@ -267,7 +272,7 @@ export default {
   position: fixed;
   z-index: 2001;
   top: 0px;
-  width: 800px;
+  width: 900px;
   /* left: 0px; */
   font-size: 14px;
   /* 字体粗细，400相当于normal */
@@ -368,18 +373,7 @@ a {
   background-color: #fc5531;
   text-align: left;
 }
-.navbar-search-container i {
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-  background: url(https://g.csdnimg.cn/common/csdn-toolbar/images/csdn-white-search.png)
-    no-repeat center center;
-  background-size: 100%;
-  vertical-align: middle;
-  position: relative;
-  top: -1px;
-  margin-left: 14px;
-}
+
 .navbar-search-container span {
   display: inline-block;
   vertical-align: top;

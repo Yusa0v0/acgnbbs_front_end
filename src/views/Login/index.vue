@@ -225,7 +225,7 @@ export default {
 }
 .login-container {
   min-height: 95vh;
-  width: 800px;
+  width: 900px;
   align-items: center;
   display: flex;
   justify-content: center;
