@@ -16,7 +16,6 @@
             </span>
           </span>
           <el-divider direction="vertical"></el-divider>
-          <el-button-group>
             <el-button
               size="medium"
               type="text"
@@ -24,6 +23,8 @@
               @click="handleClickFollowList"
               >关注:{{ this.followNum }}</el-button
             >
+            <el-divider direction="vertical"></el-divider>
+
             <el-button
               size="medium"
               type="text"
@@ -31,7 +32,7 @@
               @click="handleClickFansList"
               >粉丝:{{ this.fansNum }}
             </el-button>
-          </el-button-group>
+            <el-divider direction="vertical"></el-divider>
           <div v-show="!this.showEditButton">
             <div v-if="!isFollowed">
               <el-button type="text" class="no-outline" @click="addFollow"
