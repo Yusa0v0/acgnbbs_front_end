@@ -152,8 +152,14 @@
                 <div v-else>关注</div>
               </el-button>
             </div>
+
             <!-- <el-divider></el-divider> -->
           </div>
+          <pagination
+            :pagination="followPagination"
+            @greet-event="getFollowCurrectPageList"
+            :setCurrectPage="setFollowCurrectPage"
+          />
         </el-dialog>
 
         <el-dialog
@@ -203,6 +209,11 @@
             </div>
             <!-- <el-divider></el-divider> -->
           </div>
+          <pagination
+            :pagination="fansPagination"
+            @greet-event="getFansCurrectPageList"
+            :setCurrectPage="setFansCurrectPage"
+          />
         </el-dialog>
       </div>
 
@@ -365,6 +376,16 @@ export default {
       myPosts: [],
       myComments: [],
       pagination: {
+        total: 0,
+        pageSize: 10,
+        currentPage: 1,
+      },
+      fansPagination: {
+        total: 0,
+        pageSize: 10,
+        currentPage: 1,
+      },
+      followPagination: {
         total: 0,
         pageSize: 10,
         currentPage: 1,
@@ -550,9 +571,20 @@ export default {
         this.userCommentList();
       }
     },
+    getFansCurrectPageList() {
+      this.getFansList();
+    },
+    getFollowCurrectPageList() {
+      this.getFollowList();
+    },
     setCurrectPage(currentPage) {
       this.pagination.currentPage = currentPage;
-      console.log("父组件" + this.pagination.currentPage);
+    },
+    setFansCurrectPage(currentPage) {
+      this.fansPagination.currentPage = currentPage;
+    },
+    setFollowCurrectPage(currentPage) {
+      this.followPagination.currentPage = currentPage;
     },
     showDialog() {
       this.showEditDialog = true;
@@ -741,11 +773,15 @@ export default {
 
     getFollowList() {
       api
-        .followList(this.userId, 1, 10)
+        .followList(
+          this.userId,
+          this.followPagination.currentPage,
+          this.followPagination.pageSize
+        )
         .then((response) => {
           this.followList = response.data.userInfoFollowList;
           this.followNum = response.data.total;
-          console.log(this.followList);
+          this.followPagination.total = this.followNum;
         })
         .catch((error) => {
           this.error = error.response.data.message;
@@ -754,10 +790,15 @@ export default {
     },
     getFansList() {
       api
-        .fansList(this.userId, 1, 10)
+        .fansList(
+          this.userId,
+          this.fansPagination.currentPage,
+          this.fansPagination.pageSize
+        )
         .then((response) => {
           this.fansList = response.data.userInfoFollowList;
           this.fansNum = response.data.total;
+          this.fansPagination.total = this.fansNum;
           console.log(this.fanList);
         })
         .catch((error) => {

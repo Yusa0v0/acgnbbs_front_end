@@ -13,9 +13,6 @@
           />
         </div>
         <div class="navbar-btns">
-          <!-- <el-button type="primary" class="navbar-btn" round @click="savePost"
-          >保存草稿</el-button
-        > -->
           <el-button
             type="success"
             class="navbar-btn"
@@ -33,8 +30,6 @@
           :rules="editRules"
           label-width="80px"
         >
-
-
           <el-form-item label="帖子分类" prop="category">
             <el-radio-group v-model="editForm.category">
               <el-radio label="0">动漫</el-radio>
@@ -164,13 +159,6 @@ export default {
       console.log("this.dialogImageUrl" + this.dialogImageUrl);
       this.dialogVisible = true;
     },
-    savePost() {
-      this.$message.success("保存草稿成功");
-      console.log("title:" + this.title);
-      console.log("content:" + this.content);
-      console.log("category:" + this.editForm.category);
-      console.log("imageUrl:" + this.imageUrl);
-    },
     addPost() {
       let userId = localStorage.getItem("userId");
       api
@@ -210,8 +198,6 @@ export default {
     handleExceed() {},
     onEditorChange($event) {},
     init() {
-      // const editor = this.$refs.myTextEditor;
-      // this.Quill = new Quill(editor);
       let quill = this.$refs.myTextEditor.quill;
 
       window.addEventListener(

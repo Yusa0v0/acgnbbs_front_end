@@ -125,7 +125,6 @@ export default {
               const token = response.data.token;
               const userId = response.data.userId;
               const avatar = response.data.avatar;
-
               // 设置token
               localStorage.setItem("token", token);
               // 设置登录状态
@@ -135,12 +134,11 @@ export default {
               localStorage.setItem("userId", userId);
               // 设置avatar
               localStorage.setItem("avatar", avatar);
-
               // alert("登录成功");
               this.$message.success("登录成功，即将跳转到首页");
-              setTimeout(() => {
+              // setTimeout(() => {
                 this.$router.push("/");
-              }, 1000);
+              // }, 1000);
               // this.$ls.set('token', token);
             }
           })
