@@ -16,6 +16,7 @@ import Login from '@/views/Login'
 import Register from '@/views/Register'
 import PostList from '@/views/PostList'
 import Rank from '@/views/Rank'
+import NoticeList from '@/views/NoticeList'
 
 import PostDetails from '@/views/PostDetails'
 import Test from '@/views/Test'
@@ -71,6 +72,16 @@ export default new VueRouter({
                 headerShow: true,
                 footerShow: true,
                 title: "排行"
+            }
+        },
+        {
+            path: "/noticeList",
+            component: NoticeList,
+            name: 'noticeList',
+            meta: {
+                headerShow: true,
+                footerShow: true,
+                title: "公告"
             }
         },
         {

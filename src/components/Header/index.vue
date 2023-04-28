@@ -156,7 +156,7 @@ export default {
       } else if (tab.name == "sign") {
         this.$router.push("/sign");
       } else if (tab.name == "notice") {
-        this.$router.push("/notice");
+        this.$router.push("/noticeList");
       }
     },
     sign() {

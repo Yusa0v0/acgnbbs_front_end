@@ -47,7 +47,7 @@ const api = {
 
 
     //公告
-    noticeList: () => service.get('/notice/noticeList'),
+    getNoticeList: (currentPage,pageSize) => service.get(`/notice/noticeList/${currentPage}/${pageSize}`),
     getNewNotice:() => service.get('/notice/getNewNotice'),
     //四个分类的列表
     animationPostList: (pageNum) => service.get(`/post/animationPostList/${pageNum}`),

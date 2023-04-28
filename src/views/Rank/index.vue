@@ -258,20 +258,14 @@ export default {
 
 <style>
 .rank-list-page {
-  /* margin: 20px; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* opacity:0.8; */
 }
 
 .list-page {
-  /* display: flex;
-  flex-direction: column; */
   width: 900px;
-  /* justify-content: center; */
-  /* align-items: center; */
   min-height: 100vh;
   padding: 20px;
   background: rgba(255, 255, 255, 0.75);
