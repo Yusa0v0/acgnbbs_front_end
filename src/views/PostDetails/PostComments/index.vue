@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="comment-box">
+    <div class="comment-box" v-if="this.islogined">
       <el-avatar :src="avatar" size="large" class="comment-avatar"></el-avatar>
       <el-input
         class="comment-input"
@@ -23,7 +23,7 @@
         发送评论
       </el-button>
     </div>
-    <div v-if="comments.length === 0">还没有评论哦，赶快发送一条吧~</div>
+    <div v-if="comments.length === 0">还没有评论哦~</div>
 
     <!-- 评论列表 -->
     <div v-for="comment in comments" :key="comment.id" class="comment-item">
@@ -83,6 +83,11 @@ export default {
       pageSize: 10,
     };
   },
+  computed:{
+    islogined() {
+      return this.$store.state.logined === "true";
+    },
+  },
   methods: {
     formatDate(date) {
       return formatDate(date);
@@ -115,7 +120,6 @@ export default {
             this1.commentContent = "";
             // 如果评论数小于pageSize就刷新，否则不刷新
             if (this.comments.length < this.pageSize) {
-
               this1.$emit("refreshComments");
             }
           })

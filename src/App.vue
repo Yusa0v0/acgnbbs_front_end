@@ -6,17 +6,16 @@
     </div>
     <live2d />
     <meting-js
-      id="8692248848"
-      server="tencent"
+      :id="musicForm.id"
+      :server="musicForm.server"
       type="playlist"
       fixed="true"
-      autoplay="true"
-      loop="all"
-      order="random"
-      preload="auto"
+      :autoplay="musicForm.autoplay"
+      :loop="musicForm.loop"
+      :order="musicForm.order"
       list-folded="ture"
       list-max-height="500px"
-      lrc-type="1"
+      lrc-type="0"
     >
     </meting-js>
     <Footer v-if="$route.meta.footerShow"></Footer>
@@ -34,9 +33,16 @@ export default {
   name: "App",
   data() {
     return {
+      musicForm: {
+        id: localStorage.getItem("id"),
+        server: localStorage.getItem("server"),
+        loop: localStorage.getItem("loop"),
+        order: localStorage.getItem("order"),
+        autoplay: localStorage.getItem("autoplay"),
+      },
       headImg:
-      "https://ruabit-acgnbbs.oss-cn-hangzhou.aliyuncs.com/icons/202304231900041.png",
-        // "https://ruabit-acgnbbs.oss-cn-hangzhou.aliyuncs.com/icons/202304042106470.jpg",
+        "https://ruabit-acgnbbs.oss-cn-hangzhou.aliyuncs.com/icons/202304231900041.png",
+      // "https://ruabit-acgnbbs.oss-cn-hangzhou.aliyuncs.com/icons/202304042106470.jpg",
       notice: null,
     };
   },
@@ -46,12 +52,15 @@ export default {
     Live2d,
     APlayer,
   },
+
   mounted() {
     this.getNewNotice();
   },
 
   methods: {
     getNewNotice() {
+      console.log("id" + this.musicForm.id);
+      console.log("server" + this.musicForm.server);
       api
         .getNewNotice()
         .then((res) => {

@@ -95,6 +95,8 @@
                       </span>
                     </p>
                   </div>
+                  <a @click="showConfig">设置</a>
+                  <br />
                   <a href="" @click="logout">登出</a>
                 </div>
               </div>
@@ -112,6 +114,44 @@
         </div>
       </div>
     </div>
+    <el-dialog title="设置" width="40%" :visible.sync="showConfigDialog">
+      <el-form ref="reportForm" :model="musicForm" label-width="130px">
+        <el-form-item label="音乐源" prop="server">
+          <el-input
+            placeholder="请输入音乐源（netease、tencent、xiaomi、baidu、kugou）"
+            v-model="musicForm.server"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="歌单id" prop="id">
+          <el-input
+            placeholder="请输入音乐源"
+            v-model="musicForm.id"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="音频循环播放方式" prop="loop">
+          <el-input
+            placeholder="请输入音频循环播放方式(all,one,none)"
+            v-model="musicForm.loop"
+          ></el-input>
+        </el-form-item>
+
+        <el-form-item label="音频循环顺序" prop="order">
+          <el-input
+            placeholder="请输入音频循环顺序(list,random)"
+            v-model="musicForm.order"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="是否自动播放" prop="autoplay">
+          <el-input
+            placeholder="请输入是否自动播放(true,false)"
+            v-model="musicForm.autoplay"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="">
+          <el-button type="primary" @click="saveMusicConfig"> 保存 </el-button>
+        </el-form-item>
+      </el-form>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -128,6 +168,14 @@ export default {
       opacity: 1,
       display: "none",
       defaultText: "搜索",
+      showConfigDialog: false,
+      musicForm: {
+        id: localStorage.getItem("id"),
+        server: localStorage.getItem("server"),
+        loop: localStorage.getItem("loop"),
+        order: localStorage.getItem("order"),
+        autoplay: localStorage.getItem("autoplay"),
+      },
     };
   },
   computed: {
@@ -140,6 +188,18 @@ export default {
     },
   },
   methods: {
+    showConfig() {
+      this.showConfigDialog = true;
+    },
+    saveMusicConfig() {
+      localStorage.setItem("id", this.musicForm.id);
+      localStorage.setItem("server", this.musicForm.server);
+      localStorage.setItem("loop", this.musicForm.loop);
+      localStorage.setItem("order", this.musicForm.order);
+      localStorage.setItem("autoplay", this.musicForm.autoplay),
+        (this.showConfigDialog = false);
+      this.$message.success("保存设置成功~");
+    },
     handleTabsClick(tab, event) {
       if (tab.name == "home") {
         this.$router.push("/home");

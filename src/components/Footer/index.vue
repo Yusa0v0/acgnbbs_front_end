@@ -1,6 +1,6 @@
 <template>
     <footer>
-        <p>Copyright &copy; 2023 - My Website</p>
+        <p>Copyright &copy; 2023 - ACGN BBS</p>
     </footer>
 </template>
 

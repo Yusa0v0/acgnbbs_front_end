@@ -5,6 +5,7 @@
         <!-- <img src="@/assets/logo.png" alt="Logo" /> -->
         <h1>Register</h1>
       </div>
+      <Vcode :show="isShow" @success="success" @close="close" />
       <el-form
         :model="form"
         ref="form"
@@ -65,7 +66,7 @@
         </el-form-item>
 
         <el-form-item>
-          <el-button type="primary" @click="register">注册</el-button>
+          <el-button type="primary" @click="showVcode">注册</el-button>
           <el-button @click="resetForm">重置</el-button>
         </el-form-item>
       </el-form>
@@ -75,8 +76,12 @@
 
 <script>
 import api from "@/api/request";
+import Vcode from "vue-puzzle-vcode";
 import validate from "@/utils/validate";
 export default {
+  components: {
+    Vcode,
+  },
   data() {
     return {
       form: {
@@ -138,6 +143,7 @@ export default {
         bio: [{ required: true, message: "请输入验证码", trigger: "blur" }],
       },
       countdown: 0,
+      isShow: false, // 验证码模态框是否出现
     };
   },
   computed: {
@@ -148,6 +154,18 @@ export default {
     },
   },
   methods: {
+    // 用户通过了验证
+    success() {
+      this.isShow = false; // 通过验证后，需要手动隐藏模态框
+      this.register();
+    },
+    // 用户点击遮罩层，应该关闭模态框
+    close() {
+      this.isShow = false;
+    },
+    showVcode() {
+      this.isShow = true;
+    },
     handleSendCode() {
       if (this.countdown > 0) {
         return;

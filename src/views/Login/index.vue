@@ -5,6 +5,7 @@
         <img src="@/assets/logo.png" alt="Logo" />
       </div> -->
       <h1>Login</h1>
+      <Vcode :show="isShow" @success="success" @close="close" />
       <el-form
         ref="loginForm"
         :model="loginForm"
@@ -32,21 +33,20 @@
           />
         </el-form-item>
         <el-form-item label="验证码" prop="code" v-if="loginType === 2">
-          
-            <el-input
-              v-model="loginForm.code"
-              maxlength="4"
-              clearable
-              placeholder="请输入验证码"
-              prefix-icon="el-icon-lock"
-            />
-            <el-button
-              class="code-btn"
-              :disabled="countdown > 0"
-              @click="handleSendCode"
-            >
-              {{ countdown > 0 ? `${countdown}s` : "发送验证码" }}
-            </el-button>
+          <el-input
+            v-model="loginForm.code"
+            maxlength="4"
+            clearable
+            placeholder="请输入验证码"
+            prefix-icon="el-icon-lock"
+          />
+          <el-button
+            class="code-btn"
+            :disabled="countdown > 0"
+            @click="handleSendCode"
+          >
+            {{ countdown > 0 ? `${countdown}s` : "发送验证码" }}
+          </el-button>
         </el-form-item>
         <el-form-item>
           <div class="login-content">
@@ -54,7 +54,7 @@
               <el-radio :label="1">密码登录</el-radio>
               <el-radio :label="2">验证码登录</el-radio>
             </el-radio-group>
-            <el-button type="primary" @click="login">登录</el-button>
+            <el-button type="primary" @click="showVcode">登录</el-button>
           </div>
         </el-form-item>
       </el-form>
@@ -64,12 +64,17 @@
 
 <script>
 import api from "@/api/request";
+import Vcode from "vue-puzzle-vcode";
 import validate from "@/utils/validate";
 
 export default {
   name: "Login",
+  components: {
+    Vcode,
+  },
   data() {
     return {
+      isShow: false, // 验证码模态框是否出现
       loginForm: {
         username: "",
         password: "",
@@ -113,6 +118,17 @@ export default {
     };
   },
   methods: {
+    success() {
+      this.isShow = false; // 通过验证后，需要手动隐藏模态框
+      this.login();
+    },
+    // 用户点击遮罩层，应该关闭模态框
+    close() {
+      this.isShow = false;
+    },
+    showVcode() {
+      this.isShow = true;
+    },
     login() {
       if (this.loginType === 1) {
         api
@@ -137,7 +153,7 @@ export default {
               // alert("登录成功");
               this.$message.success("登录成功，即将跳转到首页");
               // setTimeout(() => {
-                this.$router.push("/");
+              this.$router.push("/");
               // }, 1000);
               // this.$ls.set('token', token);
             }
@@ -224,7 +240,7 @@ export default {
   justify-content: center;
 }
 .login-container {
-  min-height: 95vh;
+  min-height: 94vh;
   width: 900px;
   align-items: center;
   display: flex;
@@ -271,5 +287,4 @@ export default {
   display: flex;
   flex-direction: column;
 }
-
 </style>

@@ -1,54 +1,39 @@
 <template>
-  <div></div>
+  <div class>
+    <Vcode :show="isShow" @success="success" @close="close"  />
+    <el-button @click="submit">登录</el-button>
+  </div>
 </template>
-
+ 
 <script>
+import Vcode from "vue-puzzle-vcode";
 export default {
   data() {
     return {
-      websock: null,
+      isShow: false, // 验证码模态框是否出现
+      img1: "",
     };
   },
-  created() {
-    //页面刚进入时开启长连接
-    this.initWebSocket();
-  },
-  destroyed: function () {
-    //页面销毁时关闭长连接
-    this.websocketclose();
+  components: {
+    Vcode,
   },
   methods: {
-    //初始化weosocket
-    initWebSocket() {
-      const wsuri =
-        "ws:localhost:8000/webSocket/" + localStorage.getItem("userId"); //ws地址
-      this.websock = new WebSocket(wsuri);
-      this.websock.onopen = this.websocketonopen;
-      this.websock.onerror = this.websocketonerror;
-      this.websock.onmessage = this.websocketonmessage;
-      this.websock.onclose = this.websocketclose;
+    submit() {
+      this.isShow = true;
     },
-    websocketonopen() {
-      console.log("WebSocket连接成功");
+    // 用户通过了验证
+    success() {
+      this.isShow = false; // 通过验证后，需要手动隐藏模态框
     },
-    websocketonerror(e) {
-      //错误
-      console.log("WebSocket连接发生错误");
+    // 用户点击遮罩层，应该关闭模态框
+    close() {
+      this.isShow = false;
     },
-    websocketonmessage(e) {
-      //数据接收
-      // const redata = JSON.parse(e.data);
-      // console.log(redata.value);
-      console.log(e.data);
-    },
-    websocketsend(agentData) {
-      //数据发送
-      this.websock.send(agentData);
-    },
-    websocketclose(e) {
-      //关闭
-      console.log("connection closed (" + e.code + ")");
-    },
+  },
+  created() {
+    console.log("test page");
   },
 };
 </script>
+<style scoped>
+</style>

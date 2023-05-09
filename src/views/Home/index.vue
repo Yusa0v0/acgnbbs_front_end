@@ -4,6 +4,7 @@
     <div class="home-content">
       <card :cardData="cardData"></card>
       <my-carousel :imgList="imgList"></my-carousel>
+      <el-button @click="goToTest">测试</el-button>
     </div>
   </div>
 </template>
@@ -18,6 +19,11 @@ export default {
   components: {
     Card,
     MyCarousel,
+  },
+  methods: {
+    goToTest() {
+      this.$router.push("/test");
+    },
   },
   data() {
     return {
