@@ -176,6 +176,7 @@ export default {
         order: localStorage.getItem("order"),
         autoplay: localStorage.getItem("autoplay"),
       },
+      background: localStorage.getItem("background"),
     };
   },
   computed: {

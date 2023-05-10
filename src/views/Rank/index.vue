@@ -230,12 +230,10 @@ export default {
       }
     },
     goToUserInfo(userId) {
-      console.log("goToUserInfo");
-      let routerUrl = this.$router.resolve({
+       this.$router.push({
         path: "/userInfo/" + userId,
-        // query: { content: content },
       });
-      window.open(routerUrl.href, "_blank");
+
     },
     setCurrectPage(currentPage) {
       this.pagination.currentPage = currentPage;
