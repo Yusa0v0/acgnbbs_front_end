@@ -215,7 +215,8 @@ export default {
       } else if (tab.name == "rank") {
         this.$router.push("/rank");
       } else if (tab.name == "sign") {
-        this.$router.push("/sign");
+        // this.$router.push("/sign");
+        
       } else if (tab.name == "notice") {
         this.$router.push("/noticeList");
       }

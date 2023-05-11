@@ -3,8 +3,8 @@
     <!-- <PostList></PostList> -->
     <div class="home-content">
       <card :cardData="cardData"></card>
-      <my-carousel :imgList="imgList"></my-carousel>
-      <el-button @click="goToTest">测试</el-button>
+      <!-- <my-carousel class="carsousel-content" :imgList="imgList"></my-carousel> -->
+      <!-- <el-button @click="goToTest">测试</el-button> -->
     </div>
   </div>
 </template>
@@ -29,13 +29,13 @@ export default {
     return {
       imgList: [
         {
-          imageUrl: "https://placekitten.com/640/480?image=2",
-          jumpTo: "/userInfo/8",
+          imageUrl: "https://ruabit-acgnbbs.oss-cn-hangzhou.aliyuncs.com/images/2023/04/23/bc839a343142446793bb2115c44bd6bbimage.png",
+          jumpTo: "postDetails/36",
         },
         {
           imageUrl:
-            "https://ruabit-acgnbbs.oss-cn-hangzhou.aliyuncs.com/banner/202304152253647.jpg",
-          jumpTo: "/postDetails/18",
+            "https://ruabit-acgnbbs.oss-cn-hangzhou.aliyuncs.com/icons/202304042106470.jpg",
+          jumpTo: "/postDetails/1",
         },
         {
           imageUrl: "https://placekitten.com/640/480?image=3",
@@ -51,7 +51,7 @@ export default {
           title: "Animation",
           description: "动漫",
           image:
-            "https://ruabit-acgnbbs.oss-cn-hangzhou.aliyuncs.com/icons/202304042049737.jpg",
+            "https://ruabit-acgnbbs.oss-cn-hangzhou.aliyuncs.com/icons/202305111000470.jpg",
           jumpTo: "/postList/animation",
         },
         {
@@ -65,7 +65,8 @@ export default {
           title: "Game",
           description: "游戏",
           image:
-            "https://ruabit-acgnbbs.oss-cn-hangzhou.aliyuncs.com/icons/202304042039153.jpg",
+            // "https://ruabit-acgnbbs.oss-cn-hangzhou.aliyuncs.com/icons/202304042039153.jpg",
+            "https://ruabit-acgnbbs.oss-cn-hangzhou.aliyuncs.com/icons/202305110951477.png",
           jumpTo: "/postList/game",
         },
         {
@@ -94,5 +95,8 @@ export default {
   background: rgba(255, 255, 255, 0.75);
   min-height: 100vh;
   width: 900px;
+}
+.carsousel-content{
+  padding: 20px;
 }
 </style>

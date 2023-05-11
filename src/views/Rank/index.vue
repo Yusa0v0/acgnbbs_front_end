@@ -233,7 +233,6 @@ export default {
        this.$router.push({
         path: "/userInfo/" + userId,
       });
-
     },
     setCurrectPage(currentPage) {
       this.pagination.currentPage = currentPage;

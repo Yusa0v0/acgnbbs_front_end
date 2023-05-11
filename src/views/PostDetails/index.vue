@@ -76,7 +76,7 @@ export default {
         .then((res) => {
           this.post = res.data;
           this.pagination.total = this.post.commentNum;
-          console.log(this.post);
+          console.log("this.post.liked:"+this.post.liked);
           this.listLoading = false;
         })
         .catch((error) => {

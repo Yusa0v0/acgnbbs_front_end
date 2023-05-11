@@ -1,10 +1,10 @@
 <template>
   <div class="post-content-box">
     <div class="post-content">
-      <h1 style="text-align: center">{{ post.title }}</h1>
+      <h1 style="text-align: left;">{{ post.title }}</h1>
       <div class="post-info">
-        <small
-          >作者：{{ post.authorName }}
+        <div class="read-post-content">
+          作者：{{ post.authorName }}
           <el-divider direction="vertical"></el-divider> 发布时间：{{
             formatDate(post.createdAt)
           }}
@@ -13,7 +13,7 @@
           <el-divider direction="vertical"></el-divider> 浏览次数：{{
             post.viewTimes
           }}
-        </small>
+        </div>
         <favorite
           :favorited="this.post.favorited"
           :favoriteNum="this.post.favoriteNum"
@@ -180,15 +180,17 @@ export default {
 .post-content {
   margin-left: 20px;
   margin-right: 20px;
+  /* text-align: left; */
 }
 .post-info {
   margin-left: 20px;
   margin-right: 20px;
   display: flex;
   align-items: center;
-  text-align: center;
-  justify-content: center;
+  /* text-align: center;
+  justify-content: center; */
   margin: auto;
+  /* text-align: left; */
 }
 /* .read-post-content {
 
@@ -199,5 +201,11 @@ export default {
   /* width: 100% !important; */
   max-width: 600px;
   max-height: 400px;
+  text-align: center !important;
+}
+.read-post-content {
+  text-align: left !important;
+  /* display:flex;
+flex-direction: column; */
 }
 </style>

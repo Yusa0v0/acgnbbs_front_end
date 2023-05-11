@@ -150,10 +150,11 @@ export default {
               localStorage.setItem("userId", userId);
               // 设置avatar
               localStorage.setItem("avatar", avatar);
-              // alert("登录成功");
-              this.$message.success("登录成功，即将跳转到首页");
+              this.$message.success("登录成功");
+              history.back();
+
               // setTimeout(() => {
-              this.$router.push("/");
+              // this.$router.push("/");
               // }, 1000);
               // this.$ls.set('token', token);
             }

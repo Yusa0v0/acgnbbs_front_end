@@ -32,7 +32,7 @@ export default new VueRouter({
             component: Home,
             meta: {
                 headerShow: true,
-                footerShow: true,
+                footerShow: false,
                 title: "首页"
             }
         },
@@ -50,7 +50,7 @@ export default new VueRouter({
             component: UserInfo,
             meta: {
                 headerShow: true,
-                footerShow: true,
+                footerShow: false,
                 title: "用户信息"
             }
         },
@@ -60,7 +60,7 @@ export default new VueRouter({
             name: 'postList',
             meta: {
                 headerShow: true,
-                footerShow: true,
+                footerShow: false,
                 title: "帖子列表"
             }
         },
@@ -70,7 +70,7 @@ export default new VueRouter({
             name: 'rank',
             meta: {
                 headerShow: true,
-                footerShow: true,
+                footerShow: false,
                 title: "排行"
             }
         },
@@ -80,7 +80,7 @@ export default new VueRouter({
             name: 'noticeList',
             meta: {
                 headerShow: true,
-                footerShow: true,
+                footerShow: false,
                 title: "公告"
             }
         },
@@ -89,7 +89,7 @@ export default new VueRouter({
             component: PostDetails,
             meta: {
                 headerShow: true,
-                footerShow: true,
+                footerShow: false,
                 title: "帖子详情"
 
             }

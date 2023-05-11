@@ -8,10 +8,7 @@
     >
       <div class="card-image">
         <img :src="item.image" alt="" />
-      </div>
-      <div class="card-content">
-        <h3>{{ item.title }}</h3>
-        <p>{{ item.description }}</p>
+        <h3>{{ item.description }}</h3>
       </div>
     </div>
   </div>
@@ -24,15 +21,13 @@ export default {
     require: true,
   },
   data() {
-    return {
-    
-    };
+    return {};
   },
-  methods:{
-    goToPage(jumpTo){
-        this.$router.push(jumpTo);
+  methods: {
+    goToPage(jumpTo) {
+      this.$router.push(jumpTo);
     },
-  }
+  },
 };
 </script>
 
@@ -41,6 +36,8 @@ export default {
   display: flex;
   flex-wrap: wrap;
   /* width: 80%; */
+  height: 900px;
+
   /* text-align: center; */
   cursor: pointer;
   justify-content: center;
@@ -51,14 +48,23 @@ export default {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-bottom: 20px;
-  padding: 20px;
+    /* text-align: center; */
+  justify-content: center;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  margin-left: 5px;
+
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease-in-out;
   width: calc(50% - 10px);
   background-color: rgba(255, 255, 255, 0.75);
+
+
+
+
 }
 
 .card:hover {
@@ -66,13 +72,14 @@ export default {
 }
 
 .card-image {
-  margin-right: 20px;
+  margin-right: 10px;
+  text-align: center;
 }
 
 .card-image img {
-  max-width: 100%;
-  width: 80px;
-  height: 80px;
+  /* max-width: 100%; */
+  width: 355px;
+  height: 355px;
 }
 
 .card-content h3 {

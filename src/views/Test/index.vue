@@ -1,39 +1,14 @@
-<template>
-  <div class>
-    <Vcode :show="isShow" @success="success" @close="close"  />
-    <el-button @click="submit">登录</el-button>
+<div class="home-content">
+  <card :cardData="cardData"></card>
+</div>
+<div
+  v-for="(item, index) in cardData"
+  :key="index"
+  class="card"
+  @click="goToPage(item.jumpTo)"
+>
+  <div class="card-image">
+    <img :src="item.image" alt="" />
+    <h3>{{ item.description }}</h3>
   </div>
-</template>
- 
-<script>
-import Vcode from "vue-puzzle-vcode";
-export default {
-  data() {
-    return {
-      isShow: false, // 验证码模态框是否出现
-      img1: "",
-    };
-  },
-  components: {
-    Vcode,
-  },
-  methods: {
-    submit() {
-      this.isShow = true;
-    },
-    // 用户通过了验证
-    success() {
-      this.isShow = false; // 通过验证后，需要手动隐藏模态框
-    },
-    // 用户点击遮罩层，应该关闭模态框
-    close() {
-      this.isShow = false;
-    },
-  },
-  created() {
-    console.log("test page");
-  },
-};
-</script>
-<style scoped>
-</style>
+</div>
